@@ -21,6 +21,7 @@
 #import <RCTUtils.h>
 
 #import "RCTConvert+FBSDKSharingContent.h"
+#import "../../../../../ios/UIApplication+TopViewController.h"
 
 @implementation RCTConvert (FBSDKShareDialog)
 
@@ -77,7 +78,7 @@ RCT_EXPORT_METHOD(show:(RCTFBSDKSharingContent)content
   _showReject = reject;
   _shareDialog.shareContent = content;
   if (!_shareDialog.fromViewController) {
-    _shareDialog.fromViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    _shareDialog.fromViewController = [UIApplication topViewController];
   }
   dispatch_async(dispatch_get_main_queue(), ^{
     [_shareDialog show];
