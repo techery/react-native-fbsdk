@@ -60,6 +60,12 @@ type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
 
 module.exports = {
   /**
+   * iOS only
+   */
+  setup(): Promise<void> {
+    return ShareDialog.setup();
+  },
+  /**
    * Check if the dialog can be shown.
    */
   canShow(shareContent: ShareContent): Promise<boolean> {
