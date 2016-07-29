@@ -21,7 +21,7 @@
 #import <RCTUtils.h>
 
 #import "RCTConvert+FBSDKSharingContent.h"
-#import "../../../../../ios/UIApplication+TopViewController.h"
+#import "UIApplication+TopViewController.h"
 
 @implementation RCTConvert (FBSDKShareDialog)
 

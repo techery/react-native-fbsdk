@@ -21,6 +21,7 @@
 		35A66BE31B7E7FD100D5542D /* RCTFBSDKShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A66BD61B7E7FD100D5542D /* RCTFBSDKShareHelper.m */; };
 		35A66BE41B7E7FD100D5542D /* RCTFBSDKShareInitializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A66BD71B7E7FD100D5542D /* RCTFBSDKShareInitializer.m */; };
 		35A66CB91B7EB20800D5542D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A66CB81B7EB20800D5542D /* FBSDKShareKit.framework */; };
+		6F16DE821D4BA4A500813649 /* UIApplication+TopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16DE811D4BA4A500813649 /* UIApplication+TopViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,8 @@
 		35A66BD61B7E7FD100D5542D /* RCTFBSDKShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKShareHelper.m; path = iOS/RCTFBSDKShareHelper.m; sourceTree = "<group>"; };
 		35A66BD71B7E7FD100D5542D /* RCTFBSDKShareInitializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKShareInitializer.m; path = iOS/RCTFBSDKShareInitializer.m; sourceTree = "<group>"; };
 		35A66CB81B7EB20800D5542D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "~/Documents/FacebookSDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		6F16DE801D4BA4A500813649 /* UIApplication+TopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+TopViewController.h"; path = "iOS/UIApplication+TopViewController.h"; sourceTree = "<group>"; };
+		6F16DE811D4BA4A500813649 /* UIApplication+TopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+TopViewController.m"; path = "iOS/UIApplication+TopViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				6F16DE801D4BA4A500813649 /* UIApplication+TopViewController.h */,
+				6F16DE811D4BA4A500813649 /* UIApplication+TopViewController.m */,
 				35A66BBF1B7E7FD100D5542D /* RCTConvert+FBSDKSharingContent.h */,
 				35A66BC01B7E7FD100D5542D /* RCTConvert+FBSDKSharingContent.m */,
 				35A66BC11B7E7FD100D5542D /* RCTFBSDKAppGroupAddDialog.h */,
@@ -187,6 +192,7 @@
 				35A66BD91B7E7FD100D5542D /* RCTFBSDKAppGroupAddDialog.m in Sources */,
 				35A66BE41B7E7FD100D5542D /* RCTFBSDKShareInitializer.m in Sources */,
 				35A66BDA1B7E7FD100D5542D /* RCTFBSDKAppGroupJoinDialog.m in Sources */,
+				6F16DE821D4BA4A500813649 /* UIApplication+TopViewController.m in Sources */,
 				35A66BDF1B7E7FD100D5542D /* RCTFBSDKSendButtonManager.m in Sources */,
 				35A66BD81B7E7FD100D5542D /* RCTConvert+FBSDKSharingContent.m in Sources */,
 				35A66BE31B7E7FD100D5542D /* RCTFBSDKShareHelper.m in Sources */,
