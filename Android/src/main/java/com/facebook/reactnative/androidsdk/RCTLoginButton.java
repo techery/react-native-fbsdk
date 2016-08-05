@@ -42,7 +42,7 @@ import java.util.Set;
  * A Log In/Log Out button that maintains login state and logs in/out for the app.
  * This control requires the app ID to be specified in the AndroidManifest.xml.
  */
-public class RCTLoginButton extends LoginButton implements ActivityEventListener {
+public class RCTLoginButton extends LoginButton {
 
     private CallbackManager mCallbackManager;
     private AccessTokenTracker mAccessTokenTracker;
@@ -125,11 +125,6 @@ public class RCTLoginButton extends LoginButton implements ActivityEventListener
                         event);
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private String[] setToStringArray(Set<String> set) {
