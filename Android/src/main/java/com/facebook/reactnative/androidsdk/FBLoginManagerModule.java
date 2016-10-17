@@ -128,8 +128,9 @@ public class FBLoginManagerModule extends ReactContextBaseJavaModule {
      * Log out from Facebook.
      */
     @ReactMethod
-    public void logOut() {
+    public void logOut(final Promise promise) {
         LoginManager.getInstance().logOut();
+        promise.resolve(null);
     }
 
     /**

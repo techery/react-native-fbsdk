@@ -80,9 +80,10 @@ RCT_EXPORT_METHOD(logInWithPublishPermissions:(NSStringArray *)permissions
   [self _loginWithPermissions:permissions resolver:resolve rejecter:reject isRead:NO];
 };
 
-RCT_EXPORT_METHOD(logOut)
+RCT_EXPORT_METHOD(logOut:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
   [_loginManager logOut];
+  resolve(nil);
 };
 
 #pragma mark - Helper Methods
