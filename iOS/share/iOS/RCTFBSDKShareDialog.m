@@ -96,9 +96,12 @@ RCT_EXPORT_METHOD(show:(RCTFBSDKSharingContent)content
   });
 }
 
-RCT_EXPORT_METHOD(setMode:(FBSDKShareDialogMode)mode)
+RCT_EXPORT_METHOD(setMode:(FBSDKShareDialogMode)mode
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   _shareDialog.mode = mode;
+  resolve(nil);
 }
 
 RCT_EXPORT_METHOD(setShouldFailOnDataError:(BOOL)shouldFailOnDataError)
