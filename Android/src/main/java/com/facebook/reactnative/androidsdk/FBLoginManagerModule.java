@@ -102,7 +102,7 @@ public class FBLoginManagerModule extends ReactContextBaseJavaModule {
     public void setLoginBehavior(String loginBehaviorString, final Promise promise) {
         LoginBehavior loginBehavior = LoginBehavior.valueOf(loginBehaviorString.toUpperCase());
         LoginManager.getInstance().setLoginBehavior(loginBehavior);
-        resolve(null);
+        promise.resolve(null);
     }
 
     /**
