@@ -74,12 +74,6 @@ RCT_EXPORT_METHOD(canShow:(RCTFBSDKSharingContent)content resolver:(RCTPromiseRe
   }
 }
 
-RCT_REMAP_METHOD(setup, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    _shareDialog = [[FBSDKShareDialog alloc] init];
-    _shareDialog.delegate = self;
-    resolve(nil);
-}
-
 RCT_EXPORT_METHOD(show:(RCTFBSDKSharingContent)content
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
@@ -87,10 +81,8 @@ RCT_EXPORT_METHOD(show:(RCTFBSDKSharingContent)content
   _showResolve = resolve;
   _showReject = reject;
   _shareDialog.shareContent = content;
+  _shareDialog.fromViewController = [UIApplication topViewController];
 
-  if (!_shareDialog.fromViewController) {
-    _shareDialog.fromViewController = [UIApplication topViewController];
-  }
   dispatch_async(dispatch_get_main_queue(), ^{
     [_shareDialog show];
   });
