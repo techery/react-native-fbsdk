@@ -24,6 +24,7 @@
 const ShareDialog = require('react-native').NativeModules.FBShareDialog;
 import type { ShareContent } from './models/FBShareContent';
 
+type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
 type ShareDialogModeAndroid =
   /**
    * The mode is determined automatically.
@@ -41,7 +42,6 @@ type ShareDialogModeAndroid =
    * The feed dialog is used.
    */
   "feed";
-
 type ShareDialogModeIOS =
   /*
    * Acts with the most appropriate mode that is available.
@@ -56,8 +56,6 @@ type ShareDialogModeIOS =
    */
   'webview';
 
-type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
-
 module.exports = {
   /**
    * Check if the dialog can be shown.
@@ -69,7 +67,7 @@ module.exports = {
   /**
    * Shows the dialog using the specified content.
    */
-  show(shareContent: ShareContent): Promise {
+  show(shareContent: ShareContent): Promise<any> {
     return ShareDialog.show(shareContent);
   },
 

@@ -26,6 +26,8 @@ const NativeGraphRequestManager = require('react-native').NativeModules.FBGraphR
 
 import type GraphRequest from './FBGraphRequest';
 
+type Callback = (error: ?Object, result: ?Object) => void;
+
 function _verifyParameters(request: GraphRequest) {
   if (request.config && request.config.parameters) {
     for (var key in request.config.parameters) {
@@ -42,42 +44,61 @@ function _verifyParameters(request: GraphRequest) {
 }
 
 class FBGraphRequestManager {
+  requestBatch: Array<GraphRequest>;
+  requestCallbacks: Array<?Callback>;
+  batchCallback: Callback;
+
+  constructor() {
+    this.requestBatch = [];
+    this.requestCallbacks = [];
+  }
 
   /**
    * Add a graph request.
    */
   addRequest(request: GraphRequest): FBGraphRequestManager {
     _verifyParameters(request);
-    NativeGraphRequestManager.addToConnection(
-      request,
-      (error, result) => {
-        if (request.callback) {
-          if (typeof result === 'string') {
-            try {
-              result = JSON.parse(result);
-            } catch (e) {
-              return request.callback(e);
-            }
-          }
-          return request.callback(error, result);
-        }
-      });
+    this.requestBatch.push(request);
+    this.requestCallbacks.push(request.callback);
     return this;
   }
 
   /**
    * Add call back to the GraphRequestManager. Only one callback can be added.
+   * Note that invocation of the batch callback does not indicate success of every
+   * graph request made, only that the entire batch has finished executing.
    */
   addBatchCallback(callback: (error: ?Object, result: ?Object) => void): FBGraphRequestManager {
-    NativeGraphRequestManager.addBatchCallback(callback);
+    this.batchCallback = callback;
     return this;
   }
 
   /**
    * Executes requests in a batch.
+   * Note that when there's an issue with network connection the batch callback
+   * behavior differs in Android and iOS.
+   * On iOS, the batch callback returns an error if the batch fails with a network error.
+   * On Android, the batch callback always returns {"result": "batch finished executing"}
+   * after the batch time out. This is because detecting network status requires
+   * extra permission and it's unncessary for the sdk. Instead, you can use the NetInfo module
+   * in react-native to get the network status.
    */
   start(timeout: ?number) {
-    NativeGraphRequestManager.start(timeout || 0);
+    const that = this;
+    const callback = (error, result, response) => {
+      if (response) {
+        that.requestCallbacks.forEach((innerCallback, index, array) => {
+          if (innerCallback) {
+            innerCallback(response[index][0], response[index][1]);
+          }
+        });
+      }
+      if (that.batchCallback) {
+        that.batchCallback(error, result);
+      }
+    };
+
+    NativeGraphRequestManager.start(this.requestBatch, timeout || 0, callback);
   }
 }
 

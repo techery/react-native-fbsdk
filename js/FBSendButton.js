@@ -23,6 +23,8 @@
 
 import React, {
   PropTypes,
+} from 'react';
+import {
   requireNativeComponent,
   StyleSheet,
   View,
@@ -32,19 +34,19 @@ import type { ShareContent } from './models/FBShareContent';
 
 class SendButton extends React.Component {
   static defaultProps: {
-    style: typeof styles.defaultButtonStyle;
+    style: typeof styles.defaultButtonStyle,
   };
 
   props: {
     /**
      * Content to be shared.
      */
-    shareContent: ShareContent;
+    shareContent: ShareContent,
 
     /**
      * View style, if any.
      */
-    style?: any;
+    style?: any,
   };
 
   render() {
