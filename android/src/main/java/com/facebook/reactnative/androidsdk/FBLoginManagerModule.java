@@ -101,9 +101,10 @@ public class FBLoginManagerModule extends ReactContextBaseJavaModule {
      * @throws {@link java.lang.IllegalArgumentException} if the argument is not a valid constant.
      */
     @ReactMethod
-    public void setLoginBehavior(String loginBehaviorString) {
+    public void setLoginBehavior(String loginBehaviorString, final Promise promise) {
         LoginBehavior loginBehavior = LoginBehavior.valueOf(loginBehaviorString.toUpperCase());
         LoginManager.getInstance().setLoginBehavior(loginBehavior);
+        promise.resolve(null);
     }
 
     /**
@@ -130,8 +131,9 @@ public class FBLoginManagerModule extends ReactContextBaseJavaModule {
      * Log out from Facebook.
      */
     @ReactMethod
-    public void logOut() {
+    public void logOut(final Promise promise) {
         LoginManager.getInstance().logOut();
+        promise.resolve(null);
     }
 
     /**

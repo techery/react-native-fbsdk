@@ -46,9 +46,12 @@ RCT_EXPORT_MODULE(FBLoginManager);
 
 #pragma mark - React Native Methods
 
-RCT_EXPORT_METHOD(setLoginBehavior:(FBSDKLoginBehavior)behavior)
+RCT_EXPORT_METHOD(setLoginBehavior:(FBSDKLoginBehavior)behavior
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)rejec)
 {
   _loginManager.loginBehavior = behavior;
+  resolve(nil);
 }
 
 RCT_EXPORT_METHOD(setDefaultAudience:(FBSDKDefaultAudience)audience)
@@ -80,9 +83,10 @@ RCT_EXPORT_METHOD(logInWithPublishPermissions:(NSStringArray *)permissions
   [self _loginWithPermissions:permissions resolver:resolve rejecter:reject isRead:NO];
 };
 
-RCT_EXPORT_METHOD(logOut)
+RCT_EXPORT_METHOD(logOut:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
   [_loginManager logOut];
+  resolve(nil);
 };
 
 #pragma mark - Helper Methods
