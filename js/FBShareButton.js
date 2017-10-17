@@ -18,49 +18,41 @@
 * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *
 * @flow
+* @format
 */
 
 'use strict';
 
-import React, {
-  PropTypes,
-} from 'react';
-import {
- requireNativeComponent,
- StyleSheet,
- View,
-} from 'react-native';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import {requireNativeComponent, StyleSheet, ViewPropTypes} from 'react-native';
 
-import type { ShareContent } from './models/FBShareContent';
+import type {ShareContent} from './models/FBShareContent';
 
-class ShareButton extends React.Component {
+class ShareButton extends React.Component<{
+  /**
+   * Content to be shared.
+   */
+  shareContent: ShareContent,
+
+  /**
+   * View style, if any.
+   */
+  style?: any,
+}> {
   static defaultProps: {
     style: typeof styles.defaultButtonStyle,
   };
 
-  props: {
-    /**
-     * Content to be shared.
-     */
-    shareContent: ShareContent,
-
-    /**
-     * View style, if any.
-     */
-    style?: any,
-  };
-
   render() {
-    return (
-      <RCTFBShareButton
-        {...this.props}
-      />
-    );
+    return <RCTFBShareButton {...this.props} />;
   }
 }
 
+/* $FlowFixMe(>=0.43.0) - Remove this comment to see errors found when Flow
+ * v0.43.0 was deployed */
 ShareButton.propTypes = {
-  ...View.propTypes,
+  ...ViewPropTypes,
   shareContent: PropTypes.object,
 };
 
@@ -77,7 +69,7 @@ ShareButton.defaultProps = {
 
 const RCTFBShareButton = requireNativeComponent(
   'RCTFBShareButton',
-  ShareButton
+  ShareButton,
 );
 
 module.exports = ShareButton;

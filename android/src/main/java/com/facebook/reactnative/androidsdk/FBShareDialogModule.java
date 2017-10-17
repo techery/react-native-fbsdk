@@ -94,8 +94,9 @@ public class FBShareDialogModule extends FBSDKDialogBaseJavaModule {
     }
 
     @ReactMethod
-    public void setMode(String mode) {
+    public void setMode(String mode, final Promise promise) {
         mShareDialogMode = ShareDialog.Mode.valueOf(mode.toUpperCase());
+        promise.resolve(null);
     }
 
     @ReactMethod

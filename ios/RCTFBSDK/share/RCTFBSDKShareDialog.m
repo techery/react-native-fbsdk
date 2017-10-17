@@ -21,6 +21,7 @@
 #import <React/RCTUtils.h>
 
 #import "RCTConvert+FBSDKSharingContent.h"
+#import "UIApplication+TopViewController.h"
 
 @implementation RCTConvert (FBSDKShareDialog)
 
@@ -28,6 +29,10 @@ RCT_ENUM_CONVERTER(FBSDKShareDialogMode, (@{
   @"automatic": @(FBSDKShareDialogModeAutomatic),
   @"browser": @(FBSDKShareDialogModeBrowser),
   @"webview": @(FBSDKShareDialogModeWeb),
+  @"native": @(FBSDKShareDialogModeNative),
+  @"sharesheet": @(FBSDKShareDialogModeShareSheet),
+  @"feedwebview": @(FBSDKShareDialogModeFeedWeb),
+  @"feedbrowser": @(FBSDKShareDialogModeFeedBrowser)
 }), FBSDKShareDialogModeAutomatic, unsignedLongValue)
 
 @end
@@ -76,17 +81,19 @@ RCT_EXPORT_METHOD(show:(RCTFBSDKSharingContent)content
   _showResolve = resolve;
   _showReject = reject;
   _shareDialog.shareContent = content;
-  if (!_shareDialog.fromViewController) {
-    _shareDialog.fromViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-  }
+  _shareDialog.fromViewController = [UIApplication topViewController];
+
   dispatch_async(dispatch_get_main_queue(), ^{
     [_shareDialog show];
   });
 }
 
-RCT_EXPORT_METHOD(setMode:(FBSDKShareDialogMode)mode)
+RCT_EXPORT_METHOD(setMode:(FBSDKShareDialogMode)mode
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   _shareDialog.mode = mode;
+  resolve(nil);
 }
 
 RCT_EXPORT_METHOD(setShouldFailOnDataError:(BOOL)shouldFailOnDataError)
