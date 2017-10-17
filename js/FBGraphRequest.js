@@ -18,12 +18,12 @@
 * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *
 * @flow
+* @format
 */
 
 'use strict';
 
 type GraphRequestCallback = (error: ?Object, result: ?Object) => void;
-type GraphRequestParameters = {[key: string]: Object};
 type GraphRequestConfig = {
   /**
    * The httpMethod to use for the request, for example "GET" or "POST".
@@ -40,8 +40,9 @@ type GraphRequestConfig = {
   /**
    * The access token used by the request.
    */
-  accessToken?: string
+  accessToken?: string,
 };
+type GraphRequestParameters = {[key: string]: Object};
 
 /**
  * Represents a Graph API request and provides batch request supports.
@@ -80,7 +81,7 @@ class FBGraphRequest {
    */
   addStringParameter(paramString: string, key: string) {
     if (this.config != null && this.config.parameters != null) {
-      this.config.parameters[key] = { string: paramString };
+      this.config.parameters[key] = {string: paramString};
     }
   }
 }
